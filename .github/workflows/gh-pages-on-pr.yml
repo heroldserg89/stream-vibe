@@ -1,0 +1,110 @@
+name: Check and Deploy
+
+on:
+  push:
+    branches:
+      - master
+  pull_request_target:
+    branches:
+      - master
+
+jobs:
+  check:
+    name: Project Check
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: cache-npm-${{ hashFiles('./package-lock.json') }}
+          restore-keys: cache-npm-
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Run checks
+        run: npm run lint
+        env:
+          FORCE_COLOR: true
+
+  deploy:
+    name: Deploy
+    needs: check
+
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: cache-npm-${{ hashFiles('./package-lock.json') }}
+          restore-keys: cache-npm-
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build project (for PR)
+        if: github.event_name == 'pull_request_target'
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/${{ github.event.pull_request.number }}/
+
+      - name: Build project (for master)
+        if: github.event_name == 'push'
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+
+      - name: Deploy PR
+        if: github.event_name == 'pull_request_target'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./dist
+          branch: gh-pages
+          target-folder: ${{ github.event.pull_request.number }}
+
+      - name: Setup Pages (for master)
+        if: github.event_name == 'push'
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact (for master)
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: Deploy to GitHub Pages (for master)
+        if: github.event_name == 'push'
+        id: deployment
+        uses: actions/deploy-pages@v4
