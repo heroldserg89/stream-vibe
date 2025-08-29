@@ -1,3 +1,9 @@
+import './Header.scss'
+
 export default () => {
-  return <header>HEADER</header>
+  return (
+    <header className="header">
+      <div className="header__wraper container"></div>
+    </header>
+  )
 }
