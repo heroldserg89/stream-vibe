@@ -44,6 +44,7 @@ jobs:
   deploy:
     name: Deploy
     needs: check
+    if: github.event_name == 'push'
 
     permissions:
       contents: write
