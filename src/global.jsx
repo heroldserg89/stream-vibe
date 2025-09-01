@@ -6,7 +6,7 @@ import Footer from '@/layouts/Footer'
 import { getPath } from '@/utils/getPath'
 
 export default (props) => {
-  const { children, title } = props
+  const { children, title, url } = props
 
   return (
     <>
@@ -32,7 +32,7 @@ export default (props) => {
         />
         <link rel="manifest" href={getPath('/site.webmanifest')} />
       </Head>
-      <Header />
+      <Header url={url} />
       <Content>{children}</Content>
       <Footer />
     </>
