@@ -11,10 +11,6 @@
   cursor: pointer;
   user-select: none;
 
-  &--transparent {
-    background-color: transparent;
-  }
-
   @include laptop {
     border-radius: var(--border-radius-xs);
   }
@@ -35,7 +31,7 @@
   }
 
   &:has(.button__label.visually-hidden) {
-    padding:0;
+    padding: 0;
   }
 
   &--transparent {
@@ -45,7 +41,7 @@
       @include square(44px);
 
       .button__icon {
-        --icon-size: #{fluid-to-laptop(34, 24)}
+        --icon-size: #{fluid-to-laptop(34, 24)};
       }
     }
   }

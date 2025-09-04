@@ -30,7 +30,7 @@ export default (props) => {
 
   return (
     <Component
-      className={clsx(className, 'button', {[`button--${mode}`]:mode})}
+      className={clsx(className, 'button', { [`button--${mode}`]: mode })}
       title={title}
       aria-label={title}
       {...specificProps}
