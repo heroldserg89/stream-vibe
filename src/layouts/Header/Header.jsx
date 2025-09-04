@@ -2,6 +2,7 @@ import './Header.scss'
 import Logo from '@/components/Logo'
 import getPath from '@/utils/getPath'
 import clsx from 'clsx'
+import Button from '@/components/Button'
 
 export default (props) => {
   const { url } = props
@@ -44,6 +45,22 @@ export default (props) => {
             ))}
           </ul>
         </nav>
+        <div className="header__actions">
+          <Button
+            className="header__button"
+            label="Search"
+            isLabelHidden
+            iconName="search"
+            mode="transparent"
+          />
+          <Button
+            className="header__button"
+            label="Notification"
+            isLabelHidden
+            iconName="notification"
+            mode="transparent"
+          />
+        </div>
       </div>
     </header>
   )
