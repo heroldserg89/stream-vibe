@@ -12,7 +12,10 @@ export default (props) => {
     <>
       <Head htmlAttributes={{ lang: 'en' }}>
         <title>{title} | Stream Vibe </title>
-        <script src="/src/main.js" type="module" />
+        <script
+          src="/src/main.js"
+          type="module"
+        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -30,7 +33,10 @@ export default (props) => {
           sizes="16x16"
           href={getPath('/images/favicons/favicon-16x16.png')}
         />
-        <link rel="manifest" href={getPath('/site.webmanifest')} />
+        <link
+          rel="manifest"
+          href={getPath('/site.webmanifest')}
+        />
       </Head>
       <Header url={url} />
       <Content>{children}</Content>
