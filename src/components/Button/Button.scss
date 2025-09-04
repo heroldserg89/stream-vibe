@@ -1,6 +1,7 @@
 .button {
   @include flex-center(true);
 
+  column-gap: 4px;
   padding: fluid-to-laptop(18, 14) fluid-to-laptop(24, 20);
   font-weight: 600;
   color: var(--color-white);
@@ -9,6 +10,10 @@
   border-radius: var(--border-radius-s);
   cursor: pointer;
   user-select: none;
+
+  &--transparent {
+    background-color: transparent;
+  }
 
   @include laptop {
     border-radius: var(--border-radius-xs);
@@ -27,5 +32,21 @@
     color: var(--color-gray-60);
     background-color: var(--color-black-06);
     pointer-events: none;
+  }
+
+  &:has(.button__label.visually-hidden) {
+    padding:0;
+  }
+
+  &--transparent {
+    background-color: transparent;
+
+    &:has(.button__label.visually-hidden) {
+      @include square(44px);
+
+      .button__icon {
+        --icon-size: #{fluid-to-laptop(34, 24)}
+      }
+    }
   }
 }
