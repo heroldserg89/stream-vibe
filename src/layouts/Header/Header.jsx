@@ -3,6 +3,7 @@ import Logo from '@/components/Logo'
 import getPath from '@/utils/getPath'
 import clsx from 'clsx'
 import Button from '@/components/Button'
+import Burger from '@/components/Burger'
 
 export default (props) => {
   const { url } = props
@@ -28,11 +29,17 @@ export default (props) => {
   return (
     <header className="header">
       <div className="header__wrapper container">
-        <Logo className="header__logo" loading="eager" />
+        <Logo
+          className="header__logo"
+          loading="eager"
+        />
         <nav className="header__nav">
           <ul className="header__menu">
             {menuList.map(({ label, href }, index) => (
-              <li className="header__menu-item" key={index}>
+              <li
+                className="header__menu-item"
+                key={index}
+              >
                 <a
                   className={clsx('header__menu-link', {
                     'header__menu-link--active': href === url,
@@ -61,6 +68,7 @@ export default (props) => {
             mode="transparent"
           />
         </div>
+        <Burger className="header__burger" />
       </div>
     </header>
   )

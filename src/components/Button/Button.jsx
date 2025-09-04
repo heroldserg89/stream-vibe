@@ -25,7 +25,10 @@ export default (props) => {
   const specificProps = isLink ? linkProps : buttonProps
   const title = isLabelHidden ? label : undefined
   const iconComponent = iconName && (
-    <Icon className="button__icon" name={iconName} />
+    <Icon
+      className="button__icon"
+      name={iconName}
+    />
   )
 
   return (
