@@ -2,7 +2,7 @@ import './Burger.scss'
 import clsx from 'clsx'
 
 export default (props) => {
-  const { className } = props
+  const { className, extraAttrs } = props
 
   const title = 'Open menu'
 
@@ -12,6 +12,7 @@ export default (props) => {
       type="button"
       aria-label={title}
       title={title}
+      {...extraAttrs}
     >
       <svg
         className="burger__svg"
