@@ -1,7 +1,8 @@
 .burger {
   @include flex-center(true);
-  @include square(54px);
+  @include square(51px);
 
+  padding: 0;
   background-color: var(--color-black-10);
   border: var(--border-width-m) solid var(--color-black-15);
   border-radius: var(--border-radius-xs);
@@ -11,7 +12,7 @@
     border-color: transparent;
   }
 
-  &.is-active &__line {
+  &.is-active {
     .burger__line {
       stroke-dasharray: 90 207;
       stroke-dashoffset: -134;
@@ -23,9 +24,11 @@
     }
   }
 
-  &:not(.is-active) &__line--3 {
-    stroke-dasharray: 30 207;
-    stroke-dashoffset: -30;
+  &:not(.is-active) {
+    .burger__line--3 {
+      stroke-dasharray: 30 207;
+      stroke-dashoffset: -30;
+    }
   }
 
   &__line {
@@ -39,9 +42,9 @@
     stroke-width: 6;
     stroke-linecap: round;
     stroke-dasharray: 60 207;
-  }
 
-  &__line--2 {
-    stroke-dasharray: 60 60;
+    &--2 {
+      stroke-dasharray: 60 60;
+    }
   }
 }

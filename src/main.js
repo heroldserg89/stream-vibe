@@ -1,3 +1,3 @@
-import getPath from '@/utils/getPath'
+import OverlayMenu from '@/modules/OverlayMenu'
 
-getPath('/test/')
+new OverlayMenu()

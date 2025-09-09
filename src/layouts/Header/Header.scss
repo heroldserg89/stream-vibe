@@ -35,13 +35,28 @@
     padding: var(--container-padding-x);
     background-color: var(--color-black-20);
     border: none;
+    transition-behavior: allow-discrete;
+    transition-duration: var(--transition-duration);
 
     @include tablet-above {
       display: contents;
     }
 
+    @mixin starting-styles {
+      opacity: 0;
+      translate: 50%;
+    }
+
     &[open] {
       display: flex;
+
+      @starting-style {
+        @include starting-styles;
+      }
+    }
+
+    &:not([open]) {
+      @include starting-styles;
     }
   }
 
