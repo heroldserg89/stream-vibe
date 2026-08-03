@@ -10,7 +10,7 @@ export default (props) => {
   return (
     <a
       className={clsx('logo', className)}
-      href="/"
+      href={getPath('/')}
       title={title}
       aria-label={title}
     >
